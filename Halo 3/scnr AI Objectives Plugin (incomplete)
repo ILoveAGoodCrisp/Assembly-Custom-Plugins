@@ -1,26 +1,26 @@
-<tagblock name="AI Objectives" offset="0x71C" visible="true" elementSize="0x14">
+	<tagblock name="AI Objectives" offset="0x71C" visible="true" elementSize="0x14">
 		<stringid name="Name" offset="0x0" visible="true" />
 		<int16 name="Zone" offset="0x4" visible="true" />
-		<int16 name="Initial Role?" offset="0x6" visible="true" />
-		<tagblock name="Roles" offset="0x8" visible="true" elementSize="0xCC">
+		<int16 name="Initial Task" offset="0x6" visible="true" />
+		<tagblock name="Task" offset="0x8" visible="true" elementSize="0xCC">
 			<flags16 name="Flags" offset="0x0" visible="true" >
-			<bit name="latch ON" index="0" />
-			<bit name="latch OFF" index="1" />
-			<bit name="gate" index="2" />
-			<bit name="single use" index="3" />
-			<bit name="suppress combat" index="4" />
+			<bit name="Latch On" tooltip="Script condition locks to true once true is attained" index="0" />
+			<bit name="Latch Off" tooltip="Script condition locks to false once false is attained" index="1" />
+			<bit name="Gate" tooltip="Ai will not carry out this task, instead the conditions of this task must be met before an ai can select the sibling or child task of this one" index="2" />
+			<bit name="Single Use" tooltip="This task may only be selected once" index="3" />
+			<bit name="Suppress Combat" tooltip="Don't shoot until shot at" index="4" />
 			<bit name="Active Camo" index="5" />
-			<bit name="blind" index="6" />
-			<bit name="deaf" index="7" />
-			<bit name="braindead" index="8" />
-			<bit name="magic player sight" index="9" />
+			<bit name="Blind" index="6" />
+			<bit name="Deaf" index="7" />
+			<bit name="Braindead" index="8" />
+			<bit name="Magically See Player" index="9" />
 			<bit name="Disable Ai" index="10" />
-			<bit name="ignore fronts" index="11" />
-			<bit name="don't generate front" index="12" />
-			<bit name="reverse direction" index="13" />
-			<bit name="invert filter logic" index="14" />
+			<bit name="Ignore Fronts" index="11" />
+			<bit name="Don't Generate Front" index="12" />
+			<bit name="Reverse Direction" index="13" />
+			<bit name="Invert Filter Logic" index="14" />
 		</flags16>
-			<flags16 name="Inhibit Actions" offset="0x2" visible="true" >
+			<flags16 name="Inhibit Actions" offset="0x2" tooltip="Ai with this task cannot perform the flagged actions" visible="true" >
 			<bit name="Cover" index="0" />
 			<bit name="Retreat" index="1" />
 			<bit name="Vehicles" index="2" />
@@ -29,33 +29,33 @@
 			<bit name="Equipment" index="5" />
 			<bit name="Object Interaction" index="6" />
 			</flags16>
-			<flags16 name="Role not valid on Difficulty" offset="0x4" visible="true" >
+			<flags16 name="Task not valid on Difficulty" offset="0x4" tooltip="This task will not be selected on the flagged difficulties" visible="true" >
 			<bit name="Easy" index="0" />
 			<bit name="Normal" index="1" />
 			<bit name="Heroic" index="2" />
 			<bit name="Legendary" index="3" />
 			</flags16>
 			<flags16 name="Movement" offset="0x6" visible="true" >
-			<bit name="Run (alert)" index="0" />
-			<bit name="Walk (holstered)" index="1" />
-			<bit name="Run (holstered)" index="2" />
+			<bit name="Run (Weapon Ready)" index="0" />
+			<bit name="Walk (Weapon Stowed)" index="1" />
+			<bit name="Run (Weapon Stowed)" index="2" />
 			</flags16>
 			<flags16 name="Follow" offset="0x8" visible="true" >
 			<bit name="Player" index="0" />
 			<bit name="Squad" index="1" />
-			<bit name="Lead Player" index="2" />
-			<bit name="Player Front" index="3" />
+			<bit name="Lead Player?" index="2" />
+			<bit name="Player Front?" index="3" />
 			</flags16>
-			<int16 name="Follow Squad" offset="0xA" visible="true" />
-			<float32 name="Follow Radius" offset="0xC" visible="true" />
-			<ascii name="Entry Script" offset="0x10" length="0x20" visible="true" />
-			<ascii name="Command Script" offset="0x30" length="0x20" visible="true" />
-			<ascii name="Exhaustion Script" offset="0x50" length="0x20" visible="true" />
+			<int16 name="Follow Squad" offset="0xA" tooltip="If Squad flag ticked, ai will move to the same firing point goals as the squad with this index" visible="true" />
+			<float32 name="Follow Radius" offset="0xC" tooltip="Ai will move to firing points within this range of the player" visible="true" />
+			<ascii name="Entry Script" offset="0x10" length="0x20" tooltip="Play this static script when an ai starts this task, the script index must be referenced below" visible="true" />
+			<ascii name="Command Script" offset="0x30" length="0x20" tooltip="Any ai running this task should execute this command script, the script index must be referenced below" visible="true" />
+			<ascii name="Exhaustion Script" offset="0x50" length="0x20" tooltip="Play this static script when an ai completes this task, the script index must be referenced below" visible="true" />
 			<int16 name="Entry Script Index" offset="0x70" visible="true" />
 			<int16 name="Command Script Index" offset="0x72" visible="true" />
 			<int16 name="Exhaustion Script Index" offset="0x74" visible="true" />
-			<int16 name="Squad Group Filter" offset="0x76" visible="true" />
-			<enum16 name="Dialogue Type" offset="0x78" visible="true" >
+			<int16 name="Squad Group Filter" offset="0x76" tooltip="Only squads assigned to this group index may run this task" visible="true" />
+			<enum16 name="Dialogue Type" offset="0x78" tooltip="Play dialogue of this type when this start is first started" visible="true" >
 				<option name="none" value="0" />
 				<option name="Advance" value="1" />
 				<option name="Charge" value="2" />
@@ -73,17 +73,23 @@
 				<option name="Insult" value="14" />
 				<option name="Threaten" value="15" />
 			</enum16>
-			<int16 name="Unknown" offset="0x7A" visible="false" />
-			<tagblock name="Padding" offset="0x7C" visible="false" elementSize="0x8">
-				<undefined name="Unknown" offset="0x0" visible="false" />
-				<undefined name="Unknown" offset="0x4" visible="false" />
+			<int16 name="Padding" offset="0x7A" visible="false" />
+			<tagblock name="Pureform Actions" offset="0x7C" visible="true" tooltip="Seems to always pick the closest Area defined in the Areas block below for the transformation zone" elementSize="0x8">
+				<enum16 name="Transformation Actions" offset="0x0" visible="true" >
+					<option name="Ranged / Stalker > Stalker > Go To Point > Tank" value="0" />
+					<option name="Ranged / Stalker >  Stalker > Go To Point > Ranged" value="1" />
+					<option name="Tank > Stalker > Go To Point > Ranged" value="2" />
+				</enum16>
+				<int16 name="Transformation Count" offset="0x2" tooltip="How many actors should transform" visible="true" />
+				<int16 name="Unknown" offset="0x4" visible="true" />
+				<int16 name="Unknown" offset="0x4" visible="true" />
 			</tagblock>
 			<stringid name="Task" offset="0x88" visible="true" />
-			<int16 name="Hierarchy Level (From 100)" offset="0x8C" visible="true" />
-			<int16 name="Previous Role" offset="0x8E" visible="true" />
-			<int16 name="Next Role" offset="0x90" visible="true" />
-			<int16 name="Parent Role" offset="0x92" visible="true" />
-			<tagblock name="Conditions" offset="0x94" visible="true" elementSize="0x124">
+			<int16 name="Priority (From 100)" offset="0x8C" visible="true" />
+			<int16 name="First Child Task" offset="0x8E" visible="true" />
+			<int16 name="Next Sibling Task" offset="0x90" visible="true" />
+			<int16 name="Parent Task" offset="0x92" visible="true" />
+			<tagblock name="Conditions" offset="0x94" visible="true" tooltip="Leftover import data. No effect" elementSize="0x124">
 				<ascii name="Name" offset="0x0" length="0x20" visible="true" />
 				<ascii name="Condition" offset="0x20" length="0x100" visible="true" />
 				<enum16 name="Compile State" offset="0x120" visible="true" >
@@ -93,9 +99,9 @@
 				</enum16>
 				<int16 name="Padding" offset="0x122" visible="false" />
 			</tagblock>
-			<int16 name="Script Index" offset="0xA0" visible="true" />
-			<int16 name="Lifetime ai count" offset="0xA2" visible="true" />
-			<flags16 name="Filter Flags" offset="0xA4" visible="true" >
+			<int16 name="Script Index" offset="0xA0" tooltip= "This static script with the specified index will run when attempting to assign an ai to this task, if it returns true then the ai can be considered, pending any other filters" visible="true" />
+			<int16 name="Lifetime ai count" offset="0xA2" tooltip="No more than this amount of ai can be assigned to this task since it's first run, 0 means no limit" visible="true" />
+			<flags16 name="Filter Flags" offset="0xA4" tooltip="Check if only ai meeting the filter requirements should be considered for this task" visible="true" >
 				<bit name= "Exclusive" index= "0" />
 			</flags16>
 			<enum16 name="Filter" offset="0xA6" visible="true">
@@ -147,8 +153,8 @@
 				<option name="Mauler" value="0x2D" />
 				<option name="Mongoose" value="0x2E" />
 			</enum16>
-			<range16 name="AI Actor Capacity" offset="0xA8" visible="true" />
-			<int16 name="Max Body Count" offset="0xAC" visible="true" />
+			<range16 name="AI Capacity" offset="0xA8" tooltip="The range of ai which can be assigned to this task at one time, 0 means no limit" visible="true" />
+			<int16 name="Max Body Count" offset="0xAC" tooltip="Task becomes inactive once this many ai actors have died, 0 means no limit" visible="true" />
 			<enum16 name="Attitude" offset="0xAE" visible="true" >
 				<option name="Normal" value="0x0" />
 				<option name="Defensive" value="0x1" />
@@ -156,8 +162,8 @@
 				<option name="Playfighting" value="0x3" />
 				<option name="Patrol" value="0x4" />
 			</enum16>
-			<float32 name="Minimum Strength" offset="0xB0" visible="true" />
-			<tagblock name="Areas" offset="0xB4" visible="false" elementSize="0xA">
+			<float32 name="Minimum Strength" offset="0xB0" tooltip="Input values between 0 and 1. Task become inactive if ai strength fall belows this level" visible="true" />
+			<tagblock name="Areas" offset="0xB4" visible="true" elementSize="0xA">
 				<enum16 name="Area Type" offset="0x0" visible="true" >
 					<option name="Normal" value = "0" />
 					<option name="Search" value = "1" />
@@ -169,7 +175,7 @@
 			</flags16>
 				<int16 name="Padding" offset="0x4" visible="false" />
 				<int16 name="Zone" offset="0x6" visible="false" />
-				<int16 name="Area" offset="0x8" visible="true" />
+				<int16 name="Area" offset="0x8" tooltip="References an Areas index in Zones" visible="true" />
 			</tagblock>
 			<tagblock name="Point Geometry" offset="0xC0" visible="true" elementSize="0x20">
 				<float32 name="Point 0 X" offset="0x0" visible="true" />
