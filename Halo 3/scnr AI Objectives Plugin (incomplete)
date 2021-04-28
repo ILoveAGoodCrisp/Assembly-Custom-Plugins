@@ -1,4 +1,5 @@
-	<tagblock name="AI Objectives" offset="0x71C" visible="true" elementSize="0x14">
+</tagblock>
+		<tagblock name="AI Objectives" offset="0x71C" visible="true" elementSize="0x14">
 		<stringid name="Name" offset="0x0" visible="true" />
 		<int16 name="Zone" offset="0x4" visible="true" />
 		<int16 name="Initial Task" offset="0x6" visible="true" />
@@ -6,7 +7,7 @@
 			<flags16 name="Flags" offset="0x0" visible="true" >
 			<bit name="Latch On" tooltip="Script condition locks to true once true is attained" index="0" />
 			<bit name="Latch Off" tooltip="Script condition locks to false once false is attained" index="1" />
-			<bit name="Gate" tooltip="Ai will not carry out this task, instead the conditions of this task must be met before an ai can select the sibling or child task of this one" index="2" />
+			<bit name="Gate" tooltip="Ai cannot go back after selecting this task" index="2" />
 			<bit name="Single Use" tooltip="This task may only be selected once" index="3" />
 			<bit name="Suppress Combat" tooltip="Don't shoot until shot at" index="4" />
 			<bit name="Active Camo" index="5" />
@@ -174,7 +175,7 @@
 					<bit name="Direction Valid" index="1" />
 			</flags16>
 				<int16 name="Padding" offset="0x4" visible="false" />
-				<int16 name="Zone" offset="0x6" visible="false" />
+				<int16 name="Zone" offset="0x6" visible="true" />
 				<int16 name="Area" offset="0x8" tooltip="References an Areas index in Zones" visible="true" />
 			</tagblock>
 			<tagblock name="Point Geometry" offset="0xC0" visible="true" elementSize="0x20">
